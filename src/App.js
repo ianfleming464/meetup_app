@@ -6,9 +6,12 @@ import { getEvents } from "./api";
 import NumberOfEvents from "./NumberOfEvents";
 
 class App extends Component {
-  state = {
-    events: [],
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      events: [],
+    };
+  }
 
   updateEvents = (lat, lon) => {
     getEvents(lat, lon).then((events) => this.setState({ events }));
