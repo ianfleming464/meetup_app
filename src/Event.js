@@ -19,7 +19,7 @@ export default class Event extends Component {
 
   render() {
     const showDetails = this.state.showDetails;
-    const { event } = this.props;
+    const event = this.props.event;
 
     return (
       <div className="event">
@@ -27,7 +27,7 @@ export default class Event extends Component {
           {event.local_date} - {event.local_time}
         </p>
         <p className="name">{event.name}</p>
-        <p className="group">Group: {event.group.name}</p>
+        {event.group && event.group.name && <p className="group-name">Group: {event.group.name}</p>}
         <p className="going">{event.yes_rsvp_count} people are going</p>
         <button className="details-btn" onClick={() => this.handleShowDetails()}>
           Details
