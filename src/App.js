@@ -17,6 +17,10 @@ class App extends Component {
     getEvents(lat, lon).then((events) => this.setState({ events }));
   };
 
+  componentDidMount() {
+    this.updateEvents(null, null);
+  }
+
   render() {
     return (
       <div className="App">
