@@ -5,7 +5,7 @@ import NumberOfEvents from "../NumberOfEvents";
 describe("<NumberOfEvents/> component", () => {
   let NumberOfEventsWrapper;
   beforeAll(() => {
-    NumberOfEventsWrapper = shallow(<NumberOfEvents />);
+    NumberOfEventsWrapper = shallow(<NumberOfEvents updateEvents={() => {}} />);
   });
 
   // Check that component is rendered
@@ -15,7 +15,7 @@ describe("<NumberOfEvents/> component", () => {
 
   // Check that input for event number is rendered
   test("render input for event number", () => {
-    expect(NumberOfEventsWrapper.find(".eventNumberInput")).toHaveLength(1);
+    expect(NumberOfEventsWrapper.find(".number-of-events")).toHaveLength(1);
   });
 
   // Scenario 3.1 - default number of events is 32
@@ -29,7 +29,7 @@ describe("<NumberOfEvents/> component", () => {
       eventNumber: 20,
     });
     const numberObject = { target: { value: 50 } };
-    NumberOfEventsWrapper.find(".eventNumberInput").simulate("change", numberObject);
+    NumberOfEventsWrapper.find(".number-of-events").simulate("change", numberObject);
     expect(NumberOfEventsWrapper.state("eventNumber")).toBe(50);
   });
 });

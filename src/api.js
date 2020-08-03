@@ -1,6 +1,53 @@
 import { mockEvents } from "./mock-events";
 import axios from "axios";
 
+async function getOrRenewAccessToken(type, key) {
+  let url;
+  if (type === "get") {
+    // Lambda endpoint to get token by code
+    url = "https://0p4rf1s1zd.execute-api.eu-central-1.amazonaws.com/dev/api/token/" + key;
+  } else if (type === "renew") {
+    // Lambda endpoint to get token by refresh_token
+    url = "https://0p4rf1s1zd.execute-api.eu-central-1.amazonaws.com/dev/api/refresh/" + key;
+  }
+
+  // use axios to make GET request to endpoint
+  const tokenInfo = await axios.get(url);
+
+  // Save tokens to localStorage together with a timestamp
+  localStorage.setItem("access_token", tokenInfo.data.access_token);
+  localStorage.setItem("refresh_token", tokenInfo.data.refresh_token);
+  localStorage.setItem("last_saved_time", Date.now());
+
+  // Return the access_token
+  return tokenInfo.data.access_token;
+}
+
+function getAccessToken() {
+  const accessToken = localStorage.getItem("access_token");
+
+  if (!accessToken) {
+    const searchParams = new URLSearchParams(window.location.search);
+    const code = searchParams.get("code");
+
+    if (!code) {
+      window.location.href =
+        "https://secure.meetup.com/oauth2/authorize?client_id=pecpj0iiatck4s5pl90ladg8gp&response_type=code&redirect_uri=https://ianfleming464.github.io/meetup_app/";
+      return null;
+    }
+    return getOrRenewAccessToken("get", code);
+  }
+
+  const lastSavedTime = localStorage.getItem("last_saved_time");
+
+  if (accessToken && Date.now() - lastSavedTime < 3600000) {
+    return accessToken;
+  }
+  //if token is expired, we renew using refresh_token
+  const refreshToken = localStorage.getItem("refresh_token");
+  return getOrRenewAccessToken("renew", refreshToken);
+}
+
 async function getSuggestions(query) {
   if (window.location.href.startsWith("http://localhost")) {
     return [
@@ -36,7 +83,7 @@ async function getSuggestions(query) {
   return [];
 }
 
-async function getEvents(lat, lon) {
+async function getEvents(lat, lon, page) {
   if (window.location.href.startsWith("http://localhost")) {
     return mockEvents.events;
   }
@@ -49,56 +96,13 @@ async function getEvents(lat, lon) {
     if (lat && lon) {
       url += "&lat=" + lat + "&lon=" + lon;
     }
+    if (page) {
+      url += "&page=" + page;
+    }
     const result = await axios.get(url);
     return result.data.events;
   }
-}
-
-function getAccessToken() {
-  const accessToken = localStorage.getItem("access_token");
-
-  if (!accessToken) {
-    const searchParams = new URLSearchParams(window.location.search);
-    const code = searchParams.get("code");
-
-    if (!code) {
-      window.location.href =
-        "https://secure.meetup.com/oauth2/authorize?client_id=pecpj0iiatck4s5pl90ladg8gp&response_type=code&redirect_uri=https://ianfleming464.github.io/meetup_app/";
-      return null;
-    }
-    return getOrRenewAccessToken("get", code);
-  }
-
-  const lastSavedTime = localStorage.getItem("last_saved_time");
-
-  if (accessToken && Date.now() - lastSavedTime < 3600000) {
-    return accessToken;
-  }
-  //if token is expired, we renew using refresh_token
-  const refreshToken = localStorage.getItem("refresh_token");
-  return getOrRenewAccessToken("renew", refreshToken);
-}
-
-async function getOrRenewAccessToken(type, key) {
-  let url;
-  if (type === "get") {
-    // Lambda endpoint to get token by code
-    url = "https://0p4rf1s1zd.execute-api.eu-central-1.amazonaws.com/dev/api/token/" + key;
-  } else if (type === "renew") {
-    // Lambda endpoint to get token by refresh_token
-    url = "https://0p4rf1s1zd.execute-api.eu-central-1.amazonaws.com/dev/api/refresh/" + key;
-  }
-
-  // use axios to make GET request to endpoint
-  const tokenInfo = await axios.get(url);
-
-  // Save tokens to localStorage together with a timestamp
-  localStorage.setItem("access_token", tokenInfo.data.access_token);
-  localStorage.setItem("refresh_token", tokenInfo.data.refresh_token);
-  localStorage.setItem("last_saved_time", Date.now());
-
-  // Return the access_token
-  return tokenInfo.data.access_token;
+  return [];
 }
 
 export { getSuggestions, getEvents };

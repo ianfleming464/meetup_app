@@ -8,12 +8,15 @@ export default class NumberOfEvents extends Component {
   handleInputChanged = (event) => {
     const value = event.target.value;
     this.setState({ eventNumber: value });
+    this.props.updateEvents(null, null, value);
   };
 
   render() {
     return (
       <div className="numberOfEvents">
-        <input className="eventNumberInput" type="number" value={this.state.eventNumber} onChange={this.handleInputChanged} />
+        <span>Display </span>
+        <input className="number-of-events" type="number" value={this.state.eventNumber} onChange={this.handleInputChanged} />
+        <span> events</span>
       </div>
     );
   }
