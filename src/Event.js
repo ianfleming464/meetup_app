@@ -33,7 +33,7 @@ export default class Event extends Component {
           Details
         </button>
         {showDetails && (
-          <div className="event_details">
+          <div className="extra">
             <p className="description">{event.description}</p>
           </div>
         )}
