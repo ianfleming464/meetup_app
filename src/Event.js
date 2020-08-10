@@ -34,7 +34,7 @@ export default class Event extends Component {
         </button>
         {showDetails && (
           <div className="extra">
-            <p className="description">{event.description}</p>
+            <p className="description" dangerouslySetInnerHTML={{ __html: event.description }}></p>
           </div>
         )}
       </div>
