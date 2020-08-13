@@ -4,6 +4,7 @@ import EventList from "./EventList";
 import CitySearch from "./CitySearch";
 import { getEvents } from "./api";
 import NumberOfEvents from "./NumberOfEvents";
+import { Alert, InfoAlert } from "./Alert";
 
 class App extends Component {
   state = {
