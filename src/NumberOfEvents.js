@@ -10,24 +10,24 @@ export default class NumberOfEvents extends Component {
   handleInputChanged = (event) => {
     const value = event.target.value;
     this.setState({ eventNumber: value });
-    this.setState({ errorText: "" });
 
-    if (value < 1) {
+    if (value <= 0) {
       this.setState({
-        errorText: "Event number must be a valid number. Please try again!",
+        errorText: "Number should be at least 1!",
       });
+      this.props.updateEvents(null, null, null);
     } else {
-      this.props.updateEvents(null, null, value);
       this.setState({
         errorText: "",
       });
     }
+    this.props.updateEvents(null, null, value);
   };
 
   render() {
     return (
       <div className="numberOfEvents">
-        <span>Events: </span>
+        <label>Events: </label>
         <input className="number-of-events" type="number" value={this.state.eventNumber} onChange={this.handleInputChanged} />
         <div className="alerts">
           <ErrorAlert text={this.state.errorText} />
