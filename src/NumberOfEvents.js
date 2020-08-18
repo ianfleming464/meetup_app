@@ -11,7 +11,7 @@ export default class NumberOfEvents extends Component {
     const value = event.target.value;
     this.setState({ eventNumber: value });
 
-    if (value <= 0) {
+    if (value < 1) {
       this.setState({
         errorText: "Number should be at least 1!",
       });

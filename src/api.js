@@ -23,7 +23,7 @@ async function getOrRenewAccessToken(type, key) {
   return tokenInfo.data.access_token;
 }
 
-function getAccessToken() {
+async function getAccessToken() {
   const accessToken = localStorage.getItem("access_token");
 
   if (!accessToken) {
