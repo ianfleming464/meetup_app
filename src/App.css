@@ -1,10 +1,19 @@
-.App {
-  text-align: center;
-  padding: 2% 5%;
+html {
+  min-height: 100%;
+  background-color: #ebe6e6;
+  padding: 0 0;
+  margin: 0 0;
 }
 
 .App * {
   box-sizing: border-box;
+  font-family: "Courier New", Courier, monospace;
+  line-height: 1.6;
+}
+
+.App {
+  text-align: center;
+  padding: 2% 5%;
 }
 
 ul {
@@ -13,7 +22,12 @@ ul {
 }
 
 p {
-  margin: 5px 0;
+  margin: 5px 5px;
+}
+
+.alerts {
+  height: 12px;
+  margin: 3px;
 }
 
 input[type="text"],
@@ -35,6 +49,7 @@ input[type="number"] {
 .CitySearch {
   display: flex;
   flex-direction: column;
+  margin-bottom: 12px;
 }
 
 .suggestions {
@@ -67,6 +82,7 @@ input[type="number"] {
   border: 1px solid #ccc;
   border-radius: 4px;
   position: relative;
+  background-color: #fff;
 }
 
 .details-btn {
