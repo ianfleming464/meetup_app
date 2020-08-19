@@ -4,6 +4,7 @@ import EventList from "./EventList";
 import CitySearch from "./CitySearch";
 import { getEvents } from "./api";
 import NumberOfEvents from "./NumberOfEvents";
+import { OfflineAlert } from "./Alert";
 
 class App extends Component {
   state = {
@@ -11,12 +12,18 @@ class App extends Component {
     lat: null,
     lon: null,
     page: null,
+    offlineText: "",
   };
 
   componentDidMount() {
     this.updateEvents();
   }
   updateEvents = (lat, lon, page) => {
+    if (!navigator.onLine) {
+      this.setState({ offlineText: "Currently offline. Events loaded from last search." });
+    } else {
+      this.setState({ offlineText: "" });
+    }
     if (lat && lon) {
       getEvents(lat, lon, this.state.page).then((events) => this.setState({ events, lat, lon }));
     } else if (page) {
@@ -30,8 +37,11 @@ class App extends Component {
     return (
       <div className="App">
         <CitySearch updateEvents={this.updateEvents} />
-        <EventList events={this.state.events} />
         <NumberOfEvents updateEvents={this.updateEvents} />
+        <div className="alerts">
+          <OfflineAlert text={this.state.offlineText} />
+        </div>
+        <EventList events={this.state.events} />
       </div>
     );
   }

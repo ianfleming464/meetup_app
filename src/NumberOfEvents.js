@@ -15,7 +15,6 @@ export default class NumberOfEvents extends Component {
       this.setState({
         errorText: "Number should be at least 1!",
       });
-      this.props.updateEvents(null, null, null);
     } else {
       this.setState({
         errorText: "",
