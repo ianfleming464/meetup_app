@@ -16,6 +16,27 @@ html {
   padding: 2% 5%;
 }
 
+.header {
+  height: 155px;
+  text-align: center;
+  color: black;
+  font-size: 90px;
+  margin: 0;
+  background-color: #ffffff;
+  background: -webkit-repeating-linear-gradient(45deg, #ebe9e9, #ebe9e9 10px, #d4d1d1 10px, #d4d1d1 20px);
+  background: repeating-linear-gradient(45deg, #ebe9e9, #ebe9e9 10px, #d4d1d1 10px, #d4d1d1 20px);
+}
+
+.search-title {
+  padding: 20px 0 20px 0;
+  /* font-weight: bold; */
+  font-size: 22px;
+}
+
+.website-link {
+  color: black;
+}
+
 ul {
   padding: 0;
   list-style: none;
@@ -100,7 +121,8 @@ input[type="number"] {
   font-weight: 600;
 }
 
-.group-name {
+.group-name,
+.venue-name {
   text-transform: uppercase;
   font-size: 14px;
 }
@@ -120,4 +142,9 @@ input[type="number"] {
   width: 80px;
   margin: 10px 0 50px 0;
   text-align: center;
+  height: 40px;
+  width: 95px;
+  padding-left: 12px;
+  padding-right: 0px;
+  padding-top: 8px;
 }

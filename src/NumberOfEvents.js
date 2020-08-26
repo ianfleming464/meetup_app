@@ -27,7 +27,7 @@ export default class NumberOfEvents extends Component {
   render() {
     return (
       <div className="numberOfEvents">
-        <span>Events: </span>
+        <label>Events: </label>
         <input className="number-of-events" type="number" value={this.state.eventNumber} onChange={this.handleInputChanged} />
         <div className="alerts">
           <ErrorAlert text={this.state.errorText} />

@@ -38,6 +38,7 @@ export default class Event extends Component {
         </p>
         <p className="name">{event.name}</p>
         {event.group && event.group.name && <p className="group-name">Group: {event.group.name}</p>}
+        {event.venue && event.venue.name && <p className="venue-name">Location: {event.venue.name}</p>}
 
         <button className="details-btn" onClick={this.handleShowDetails}>
           Details

@@ -62,6 +62,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <h1 className="header">meetup </h1>
+        <br />
+        <a className="website-link" href="https://ianfleming464.github.io/portfolio-website/" target="_blank">
+          by Ian Fleming
+        </a>
+        <p className="search-title">..because we still need people, in this crazy world.</p>
         <CitySearch updateEvents={this.updateEvents} />
         <NumberOfEvents updateEvents={this.updateEvents} />
         <div className="alerts">
