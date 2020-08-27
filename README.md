@@ -1,6 +1,37 @@
 <<<<<<< HEAD
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Objective: 
+
+To build a serverless, progressive web application (PWA) which takes info from the Meetup API (and OAuth 2), and displays events in a city of your choice.
+
+## Technologies used: 
+
+- React
+- AWS Lambda
+- CSS
+- ReCharts (Data visualisation)
+- Jest/Cucumber/Gherkin (Test-driven and behaviour-driven development) 
+- Puppeteer (end-to-end testing)
+
+## Dependencies :
+
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "^7.2.1",
+    "atatus-js": "^4.2.1",
+    "atatus-spa": "^4.2.1",
+    "axios": "^0.19.2",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "jest-cucumber": "^3.0.0",
+    "moment": "^2.27.0",
+    "puppeteer": "^5.2.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-scripts": "3.4.1",
+    "recharts": "^1.8.5"
+
 ## Available Scripts
 
 In the project directory, you can run:
